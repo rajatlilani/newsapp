@@ -1,10 +1,7 @@
-import React, { Component } from 'react'
-import Newsitem from './Newsitem'
-
-
-
-export class News extends Component {
-    articles = [
+{
+    "status": "ok",
+    "totalResults": 537,
+    "articles": [
         {
             "source": {
                 "id": null,
@@ -43,74 +40,6 @@ export class News extends Component {
             "urlToImage": "https://i.blogs.es/4e5d96/musica/840_560.jpeg",
             "publishedAt": "2022-05-22T10:00:33Z",
             "content": "10 de mayo de 2022: el día en que se anunció la muerte oficial del iPod. Un producto icónico, símbolo de una década para la cultura popular, que permitió que luego naciese el iPhone, a la postre el t… [+2425 chars]"
-        }
+        },
     ]
-    constructor() {
-        super();
-        console.log("constructor froms news");
-        this.state = {
-            articles: this.articles,
-            loading: false,
-            page: 1
-
-
-        }
-    }
-    async componentDidMount() {
-        let url = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=c9577622df0d4873b896846801178a18&page=1";
-        let data = await fetch(url);
-        let parsedData = await data.json()
-        this.setState({ articles: parsedData.articles })
-
-    }
-
-    handleNextClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=c9577622df0d4873b896846801178a18&page=${this.state.page + 1}`;
-        let data = await fetch(url);
-        let parsedData = await data.json();
-        console.log("next");
-
-
-        this.setState({
-            page: this.state.page + 1,
-            articles: parsedData.articles
-        })
-
-    }
-    handlePreviousClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=c9577622df0d4873b896846801178a18&page=${this.state.page - 1}`;
-        let data = await fetch(url);
-        let parsedData = await data.json();
-        console.log("Previous");
-
-        this.setState({
-            page: this.state.page - 1,
-            articles: parsedData.articles
-        })
-
-
-    }
-    render() {
-        return (
-            <div className='container my-3'><h1>News Harry - Top Headlines</h1>
-                <div className="row" >
-                    {this.state.articles.map((element) => {
-                        return <div className="col md-4" key={element.url}>
-                            <Newsitem title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageurl={element.urlToImage} newsurl={element.url} />
-
-                        </div>
-                    })}
-
-
-
-                </div>
-                <div className="container d-flex justify-content-between">
-                    <button disabled={this.state.page <= 1} type="button" className="btn btn-dark" onClick={this.handlePreviousClick}>&laquo;previous</button>
-                    <button type="button" className="btn btn-dark" onClick={this.handleNextClick}>next&raquo;</button>
-                </div>
-            </div >
-        )
-    }
 }
-
-export default News
