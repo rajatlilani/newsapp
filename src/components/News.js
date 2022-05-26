@@ -92,7 +92,7 @@ export class News extends Component {
     }
     render() {
         return (
-            <div className='container my-3'><h1>News Harry - Top Headlines</h1>
+            <div className='container my-3'><h1 className='text-center'>News Harry - Top Headlines</h1>
                 <div className="row" >
                     {this.state.articles.map((element) => {
                         return <div className="col md-4" key={element.url}>
